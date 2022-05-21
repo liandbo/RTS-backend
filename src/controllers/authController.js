@@ -104,7 +104,7 @@ exports.login = async (req, res, next) => {
             res.status(200).json({
                 status: "success",
                 data: {
-                    token, userName: result.Name, Department: result.Department, IDnumber: result.IDnumber, Role: result.Role
+                    token, userName: result.Name, Department: result.Department, IDnumber: result.IDnumber, Role: result.Role, Phone: result.Phone
                 }
             })
         } else {
