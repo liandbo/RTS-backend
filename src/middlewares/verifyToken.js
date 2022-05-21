@@ -11,8 +11,10 @@ exports.verifyToken = (req, res, next) => {
 
     const token = Authorization.replace('Bearer ', '');
 
-    const {userId} = jwt.verify(token, process.env.APP_SECRET);
+    const {userId, userRole, userDepartment} = jwt.verify(token, process.env.APP_SECRET);
 
     req.user = {userId};
+    req.role = {userRole};
+    req.department = {userDepartment};
     next();
 }
