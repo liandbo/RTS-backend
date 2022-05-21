@@ -8,7 +8,6 @@ const bcrypt = require('bcryptjs');
 
 exports.studentRegister = async (req, res, next) => {
     try {
-        req.body['IDnumber'] = req.body['IDnumber'].toLowerCase();
         const user = await Student.create(req.body);
         const token = jwt.sign({userId: user._id}, process.env.APP_SECRET);
         res.status(200).json({
@@ -22,7 +21,6 @@ exports.studentRegister = async (req, res, next) => {
 
 exports.secretaryRegister = async (req, res, next) => {
     try {
-        req.body['IDnumber'] = req.body['IDnumber'].toLowerCase();
         const user = await Secretary.create(req.body);
         const token = jwt.sign({userId: user._id}, process.env.APP_SECRET);
         res.status(200).json({
@@ -35,7 +33,6 @@ exports.secretaryRegister = async (req, res, next) => {
 }
 exports.DTDTRegister = async (req, res, next) => {
     try {
-        req.body['IDnumber'] = req.body['IDnumber'].toLowerCase();
         const user = await DTDT.create(req.body);
         const token = jwt.sign({userId: user._id}, process.env.APP_SECRET);
         res.status(200).json({
@@ -48,7 +45,6 @@ exports.DTDTRegister = async (req, res, next) => {
 }
 exports.QLKHRegister = async (req, res, next) => {
     try {
-        req.body['IDnumber'] = req.body['IDnumber'].toLowerCase();
         const user = await QLKH.create(req.body);
         const token = jwt.sign({userId: user._id}, process.env.APP_SECRET);
         res.status(200).json({
@@ -61,7 +57,6 @@ exports.QLKHRegister = async (req, res, next) => {
 }
 exports.HCTHRegister = async (req, res, next) => {
     try {
-        req.body['IDnumber'] = req.body['IDnumber'].toLowerCase();
         const user = await HCTH.create(req.body);
         const token = jwt.sign({userId: user._id}, process.env.APP_SECRET);
         res.status(200).json({
@@ -98,7 +93,6 @@ async function FindAccount(ID) {
 
 exports.login = async (req, res, next) => {
     try {
-        req.body['IDnumber'] = req.body['IDnumber'].toLowerCase();
         const result = await FindAccount(req.body.IDnumber)
         if (!result) {
             const err = new Error('ID is not correct');

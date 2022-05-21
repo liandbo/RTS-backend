@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 
 const secretarySchema = new mongoose.Schema({
     Name: { type: String, unique: true, trim: true, required: [true, 'Name must be required'] },
-    IDnumber: { type: String, unique: true, trim: true, required: [true, 'IDnumber must be required'] },
+    IDnumber: { type: String, lowercase: true, unique: true, trim: true, required: [true, 'IDnumber must be required'] },
     Password: { type: String, unique: false, trim: true, equired: [true, 'Password must be required'], 
         minlength:[6, 'Password must be atleast 6 characters']},
     Role: { type: Number, unique: false, trim: true, required:[true, 'Role must be assigned'] },
