@@ -20,7 +20,7 @@ exports.errorHandler = (err, req, res, next) => {
         err.statusCode = 400;
         err.message = [];
         for (let p in err.errors) {
-            err.message.push(err.errors[p].properties.message);
+            err.message.push(err.errors[p].properties?.message);
         }
     }
 

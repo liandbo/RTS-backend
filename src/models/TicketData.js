@@ -8,7 +8,6 @@ const dataSchema = new mongoose.Schema({
         ref: 'Ticket'
     },
     AnswerRole: { type: Number, unique: false, trim: true, required:[true, 'AnswerRole must be assigned']}
-    
 },{timestamps: true});
 
 

@@ -13,8 +13,8 @@ exports.verifyToken = (req, res, next) => {
 
     const {userId, userRole, userDepartment} = jwt.verify(token, process.env.APP_SECRET);
 
-    req.user = {userId};
-    req.role = {userRole};
-    req.department = {userDepartment};
+    req.user = userId;
+    req.role = userRole;
+    req.department = userDepartment;
     next();
 }
