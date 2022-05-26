@@ -13,6 +13,11 @@ exports.getStudentTicketList = async (req, res, next) => {
                 status: 'get student ticketlist success',
                 data: { ticketList }
             });
+        } else {
+            res.status(401).json({
+                status: 'failed',
+                message: 'Unauthorized'
+            });
         }
     } catch (error) {
         next(error);
