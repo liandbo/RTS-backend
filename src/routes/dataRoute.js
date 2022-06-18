@@ -6,7 +6,10 @@ const {
     getRequestList,
     getTicketData,
     updateTicket,
-    closeTicket
+    closeTicket,
+    addDepartment,
+    getDepartment,
+    addTicketStatus
 
 } = require('../controllers/ticketController');
 const { verifyToken } = require('../middlewares/verifyToken');
@@ -20,5 +23,8 @@ Router.route('/getRequestList').get(getRequestList);
 Router.route('/getTicketData').get(getTicketData);
 Router.route('/updateTicket').post(verifyToken, updateTicket);
 Router.route('/closeTicket').put(verifyToken, closeTicket);
+Router.route('/addDepartment').post(addDepartment);
+Router.route('/getDepartment').get(getDepartment);
+Router.route('/addTicketStatus').post(addTicketStatus);
 
 module.exports = Router;

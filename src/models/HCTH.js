@@ -7,7 +7,10 @@ const HCTHSchema = new mongoose.Schema({
     Password: { type: String, unique: false, trim: true, equired: [true, 'Password must be required'], 
         minlength:[6, 'Password must be atleast 6 characters']},
     Role: { type: Number, unique: false, trim: true, required:[true, 'Role must be assigned'] },
-    Department: { type: String, unique: false, trim: true, required:[true, 'Department must be assigned'], uppercase: true },
+    Department: { 
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Department'
+    },
 },{timestamps: false});
 
 HCTHSchema.pre('save', function(next) {
