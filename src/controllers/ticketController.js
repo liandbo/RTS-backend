@@ -80,6 +80,7 @@ exports.getStudentTicketList = async (req, res, next) => {
 
 exports.createTicket = async (req, res, next) => {
     try {
+        const name = req.body.Name;
         const role = req.role;
         const userId = req.user;
         const requestId = req.body.requestId;
@@ -88,6 +89,7 @@ exports.createTicket = async (req, res, next) => {
         const data = req.body.Data;
         if (role === Number(process.env.ROLE_STUDENT)) {
             const ticketCreated = await Ticket.create({ 
+                Name: name,
                 Department: departmentId,
                 Status: process.env.TicketOpen,
                 TargetRole: target,
@@ -173,3 +175,25 @@ exports.closeTicket = async (req, res, next) => {
     }
 };
 
+exports.getSecretaryTicketList = async (req, res, next) => {
+    try {
+        const role = req.role;
+        const userDepartment = req.department;
+        if (role === parseInt(process.env.ROLE_SECRETARY)) {
+            const ticketList = await Ticket.find({ status: process.env.TicketOpen, TargetRole: role, Department: userDepartment})
+            .populate('Department')
+            .populate('Student', 'Name IDnumber');
+            res.status(200).json({
+                status: 'get secretary ticketlist success',
+                data: { ticketList }
+            });
+        } else {
+            res.status(401).json({
+                status: 'failed',
+                message: 'Unauthorized'
+            });
+        }
+    } catch (error) {
+        next(error);
+    }
+};

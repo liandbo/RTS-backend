@@ -9,7 +9,8 @@ const {
     closeTicket,
     addDepartment,
     getDepartment,
-    addTicketStatus
+    addTicketStatus,
+    getSecretaryTicketList
 
 } = require('../controllers/ticketController');
 const { verifyToken } = require('../middlewares/verifyToken');
@@ -19,6 +20,7 @@ const Router = express.Router();
 
 Router.route('/create').post(verifyToken, createTicket);
 Router.route('/getStudentTicketList').get(verifyToken, getStudentTicketList);
+Router.route('/getSecretaryTicketList').get(verifyToken, getSecretaryTicketList);
 Router.route('/getRequestList').get(getRequestList);
 Router.route('/getTicketData').get(getTicketData);
 Router.route('/updateTicket').post(verifyToken, updateTicket);

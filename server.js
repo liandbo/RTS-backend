@@ -12,6 +12,7 @@ const cors = require('cors');
 //route
 const authRoute = require('./src/routes/authRoute');
 const dataRoute = require('./src/routes/dataRoute');
+const filesRoute = require('./src/routes/filesRoute');
 
 // import errorHandler
 const {errorHandler} = require('./src/middlewares/errorHandler');
@@ -27,6 +28,7 @@ app.use(express.json());
 // Mount the route
 app.use('/api/v1/auth', authRoute);
 app.use('/api/v1/ticket', dataRoute);
+app.use('/api/v1/files', filesRoute);
 
 app.all('*', (req, res, next) => {
     const err = new Error('The route cannot be found');
