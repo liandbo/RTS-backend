@@ -17,9 +17,6 @@ exports.uploadTicketFile = async (req, res, next) => {
         if (err) {
             next(err);
         } else {
-            console.log(req.file.originalname)
-            console.log(req.file.destination)
-            console.log(req.body.ticket)
             const src = req.file.destination + "/" + req.file.originalname;
             const des = "./assets/uploadfiles/" + req.body.ticket + "/" + req.file.originalname;
             fs.move(src, des, (error) => {
