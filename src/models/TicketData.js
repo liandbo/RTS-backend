@@ -2,7 +2,10 @@ const mongoose = require('mongoose');
 
 
 const dataSchema = new mongoose.Schema({
-    Data: { type: {}, unique: false, required:[true, 'Data must be assigned'] },
+    Data: {
+        Content: { type: String, unique: false, required: false },
+        FileName: { type: String, unique: false, required: false }
+    },
     Ticket : { 
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Ticket'

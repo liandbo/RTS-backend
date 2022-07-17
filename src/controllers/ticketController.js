@@ -86,7 +86,8 @@ exports.createTicket = async (req, res, next) => {
         const requestId = req.body.requestId;
         const target = req.body.TargetRole;
         const departmentId = req.body.Department;
-        const data = req.body.Data;
+        const content = req.body.Content;
+        const filename= req.body.FileName;
         if (role === Number(process.env.ROLE_STUDENT)) {
             const ticketCreated = await Ticket.create({ 
                 Name: name,
@@ -94,15 +95,22 @@ exports.createTicket = async (req, res, next) => {
                 Status: process.env.TicketOpen,
                 TargetRole: target,
                 Student: userId, 
-                Request: requestId 
+                Request: requestId,
             });
             const firstTicketData = await TicketData.create({
                 Ticket: ticketCreated._id,
                 AnswerRole: Number(process.env.ROLE_STUDENT),
-                Data: data
+                Data: {
+                    Content: content,
+                    FileName: filename,
+                }
             });
             res.status(200).json({
                 status: 'create success',
+                data: { 
+                    ticketId: ticketCreated._id,
+                    dataId: firstTicketData._id
+                }
             });
         }
     } catch (error) {
@@ -128,7 +136,7 @@ exports.getTicketData = async (req,res,next) => {
         const dataList = await TicketData.find({Ticket: ticket});
         res.status(200).json({
             status: 'getTicketData success',
-            data: {dataList}
+            data: {dataList: dataList}
         });
     } catch (error) {
         next(error);
